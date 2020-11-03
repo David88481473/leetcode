@@ -23,6 +23,6 @@ function findDown(tNode, sum) { // 求从单个节点开始满足条件的路径
   if(!tNode) return 0 //若节点为空，返回0
   let flag = tNode.val === sum ? 1 : 0 // 当前节点权值刚好等于sum则算为1，否则为0
   let leftSum = findDown(tNode.left, sum - tNode.val) //剩下的权值要子树来凑，先看左子树能不能凑出来
-  let rightSum = findDown(tNode.right, sum-tNode.val) //再看右子树是否能凑出来
+  let rightSum = findDown(tNode.right, sum - tNode.val) //再看右子树是否能凑出来
   return flag  + leftSum + rightSum // 返回符合条件的路径数
 }
