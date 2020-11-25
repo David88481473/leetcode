@@ -50,7 +50,7 @@ class MyPromise {
         setTimeout(() => {
           try {
             let result = onFulfilled(this.value);
-            solvePromise(newPromise, result, resolve, reject);
+            resolvePromise(newPromise, result, resolve, reject);
           } catch(e) {
             reject(e);
           }
@@ -61,7 +61,7 @@ class MyPromise {
         setTimeout(() => {
           try {
             let result = onRejected(this.reason);
-            solvePromise(newPromise, result, resolve, reject);
+            resolvePromise(newPromise, result, resolve, reject);
           } catch(e) {
             reject(e);
           }
@@ -74,7 +74,7 @@ class MyPromise {
           setTimeout(() => {
             try {
               let result = onFulfilled(this.value);
-              solvePromise(newPromise, result, resolve, reject);
+              resolvePromise(newPromise, result, resolve, reject);
             } catch(e) {
               reject(e);
             }
@@ -85,7 +85,7 @@ class MyPromise {
           setTimeout(() => {
             try {
               let result = onRejected(this.reason);
-              solvePromise(newPromise, result, resolve, reject);
+              resolvePromise(newPromise, result, resolve, reject);
             } catch(e) {
               reject(e);
             }
@@ -112,7 +112,7 @@ const resolvePromise = (newPromise, result, resolve, reject) => {
         then.call(result, y => {
           if (called) return;
           called = true;
-          resolvePromise()
+          resolvePromise(newPromise, y, resolve, reject)
         })
       } else {
         // 如果有then，但不是函数，就直接resolve
