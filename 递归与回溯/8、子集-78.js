@@ -3,16 +3,17 @@
  * @return {number[][]}
  */
 var subsets = function(nums) {
+  if (!nums || !nums.length) return [];
   let result = [];
-  function helper(index, nums, result, temp) {
-      result.push(temp.concat());
-      for (let j = index; j < nums.length; j++) {
-          temp.push(nums[j]);
-          helper(j+1, nums, result, temp);
-          temp.pop();
+  function backtrace(start, tmp) {
+      result.push(tmp.concat());
+      for (let i = start; i < nums.length; i++) {
+          tmp.push(nums[i]);
+          backtrace(i+1, tmp);
+          tmp.pop();
       }
   }
-  helper(0, nums, result, []);
+  backtrace(0, []);
   return result;
 };
 
