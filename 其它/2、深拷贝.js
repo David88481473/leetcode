@@ -38,8 +38,11 @@ function deepCopy (originObj, map = new Map()) { // 这里WeakMap可能没必要
 
     // 其他对象
     let cloneObj = Object.create(Object.getPrototypeOf(originObj), Object.getOwnPropertyDescriptor(originObj)); // 会拷贝原型和属性描述
+    
+    map.set(originObj, cloneObj);
+
     for (let prop of Reflect.ownKeys(originObj)) { // Reflect.ownKeys可以获取Symbol类型属性
-      cloneObj[prop] = deepCopy(originObj[prop]);
+      cloneObj[prop] = deepCopy(originObj[prop], map);
     }
 
     return cloneObj;
